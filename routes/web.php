@@ -51,3 +51,21 @@ Route::get('/register', function () {
 Route::get('/typography', function () {
     return view('typography');
 });
+
+/*--------------------------------------------------------------------*/
+
+Route::get('/home', function () {
+    return view('home');
+});
+
+Route::get('/queueManagementInput', function () {
+    return view('queue-management/input');
+});
+
+Route::get('/queueManagement', function () {
+    return view('queue-management/output');
+});
+
+Route::get('/codeGenerator', function () {
+    return view('code-generator/input');
+});
