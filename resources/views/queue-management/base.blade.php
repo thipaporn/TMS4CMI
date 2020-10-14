@@ -146,7 +146,7 @@
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="codeGenerator">
+              <a class="nav-link" href="codeGeneratorInput">
                 <span class="menu-title">สร้างรหัสการติดตาม</span>
                 <i class="mdi mdi-qrcode menu-icon"></i>
               </a>
