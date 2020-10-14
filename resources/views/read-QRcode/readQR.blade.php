@@ -6,6 +6,9 @@
 @section('content-wrapper')
 <h2>อัปเดตสถานะการขนส่ง</h2><br />
 <div class="col-md-12 grid-margin stretch-card">
+<div>
+    <?php echo $bill ?>
+</div>
   <div class="card">
     <div class="card-body">
       <div class="form-group row">

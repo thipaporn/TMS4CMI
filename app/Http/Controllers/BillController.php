@@ -17,4 +17,11 @@ class BillController extends Controller
         $bill = DB::table('bill')->where(['trackNumber'=>$billNum])->get();
         return view('code-generator/output',['bill' => $bill]);
     }
+
+    public function readQR(request $request){
+        $billNum = $request->Input('bill');
+        $bill = DB::table('update_status')->where(['trackNumber'=>$billNum])
+            ->orderBy('updateDate', 'DESC')->first()->amout;
+        return view('read-QRcode/readQR',['bill' => $bill]);
+    }
 }

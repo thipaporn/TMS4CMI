@@ -68,7 +68,8 @@
                   <h3 class="col-sm-3 col-form-label">หมายเลขติดตามการขนส่ง</h3>
                   <div class="col-lg-7">
                       @foreach ($bill as $b)
-                        <input id="qr-text" type="text" class="form-control text-center" value="{{$b->trackNumber}}" readonly>
+                        <input type="text" class="form-control text-center" value="{{$b->trackNumber}}" readonly>
+                        <input id="qr-text" type="hidden" value="http://localhost/TMS4CMI/public/readQR/?bill={{$b->trackNumber}}">
                       @endforeach
                   </div>
                 </div>

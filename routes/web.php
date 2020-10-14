@@ -75,8 +75,5 @@ Route::get('/queueManagement', function () {
 Route::get('/codeGeneratorInput', 'App\Http\Controllers\BillController@bill');
 Route::post('/codeGeneratorOutput','App\Http\Controllers\BillController@billView');
 
-
-Route::get('/readQR', function () {
-    return view('read-QRcode/readQR');
-});
+Route::get('/readQR', 'App\Http\Controllers\BillController@readQR');
 
