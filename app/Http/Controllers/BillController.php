@@ -17,4 +17,38 @@ class BillController extends Controller
         $bill = DB::table('bill')->where(['trackNumber'=>$billNum])->get();
         return view('code-generator/output',['bill' => $bill]);
     }
+
+    public function readQR(request $request){
+        $billNum = $request->Input('bill');
+        $bill = DB::table('update_status')
+            ->where(['trackNumber'=>$billNum])
+            ->orderBy('updateDate', 'DESC')->take(1)->get();
+        $name = DB::table('bill')
+            ->where(['trackNumber'=>$billNum])->get();
+        return view('read-QRcode/readQR',['bill' => $bill, 'name' => $name]);
+    }
+
+    public function update(request $request){
+        $billNum = $_POST['billNum'];
+        $bill = DB::table('update_status')
+            ->where(['trackNumber'=>$billNum])
+            ->orderBy('updateDate', 'DESC')->take(1)->get();
+        $name = DB::table('bill');
+        $billStatus = $_POST['billStatus'];
+        if($billStatus == 'order'){
+            $billStatus = 'processing';
+        }elseif($billStatus == 'processing'){
+            $billStatus = 'shipping';
+        }elseif($billStatus == 'shipping'){
+            $billStatus = 'complete';
+        }else{
+            $billStatus = 'ERROR';
+        }
+        DB::table('update_status')->insert(
+            ['trackNumber' => $billNum,
+            'status' => $billStatus,
+            'updateDate' => now()]
+        );
+        return redirect()->back();
+    }
 }

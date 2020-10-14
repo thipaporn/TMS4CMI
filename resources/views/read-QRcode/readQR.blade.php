@@ -6,13 +6,14 @@
 @section('content-wrapper')
 <h2>อัปเดตสถานะการขนส่ง</h2><br />
 <div class="col-md-12 grid-margin stretch-card">
+@foreach ($bill as $b)
   <div class="card">
     <div class="card-body">
       <div class="form-group row">
         <div class="col-lg-2"></div>
         <h3 class="col-sm-2 col-form-label">เลขที่บิล</h3>
         <div class="col-lg-6">
-          <input type="text" class="form-control" style="font-size: 15px;" value="11111111" readonly>
+          <input type="text" class="form-control" style="font-size: 15px;" value="{{$b->trackNumber}}" readonly>
         </div>
         <div class="col-lg-2"></div>
       </div>
@@ -20,7 +21,7 @@
         <div class="col-lg-2"></div>
         <h3 class="col-sm-2 col-form-label">ชื่อลูกค้า</h3>
         <div class="col-lg-6">
-          <input type="text" class="form-control" style="font-size: 15px;" value="บริษัทจำกัดมหาชน" readonly>
+          <input type="text" class="form-control" style="font-size: 15px;" value="{{$name[0]->name}}" readonly>
         </div>
         <div class="col-lg-2"></div>
       </div>
@@ -28,17 +29,38 @@
         <div class="col-lg-2"></div>
         <h3 class="col-sm-2 col-form-label">สถานะปัจจุบัน</h3>
         <div class="col-lg-6">
-          <input type="text" class="form-control" style="font-size: 15px;" value="อยู่ระหว่างการขนส่ง" readonly>
+        <?php
+            if($b->status == 'order'){
+                $status = 'รับออเดอร์เข้าระบบ';
+            }elseif($b->status == 'processing'){
+                 $status = "กำลังจัดเตรียมสินค้า";
+            }elseif($b->status == 'shipping'){
+                $status = "อยู่ระหว่างการขนส่ง";
+            }else{
+                 $status = "จัดส่งเรียบร้อยแล้ว";
+            }
+        ?>
+        <input type="text" class="form-control"style="font-size: 15px;" value="{{$status}}" readonly>
         </div>
         <div class="col-lg-2"></div>
       </div>
-      <div class="row">
-        <div class="col-lg-3"></div>
-        <button type="button" class="btn btn-gradient-primary btn-lg btn-block col-lg-6" style="font-size: 20px;"> อัปเดตสถานะ </button>
-        <div class="col-lg-3"></div>
-      </div>
+        <form action="updateStatus" method="POST">
+            <div class="row">
+                <div class="col-lg-3"></div>
+
+                    @csrf
+                    <input type="hidden" name="billNum" value="{{$b->trackNumber}}" />
+                    <input type="hidden" name="billStatus" value="{{$b->status}}" />
+                    @if ($b->status != 'complete')
+                        <button type="submit" class="btn btn-gradient-primary btn-lg btn-block col-lg-6" style="font-size: 20px;"> อัปเดตสถานะ </button>
+                    @endif
+                    
+                <div class="col-lg-3"></div>
+            </div>
+        </form>
     </div>
   </div>
+  @endforeach
   @endsection
 
   @section('script')

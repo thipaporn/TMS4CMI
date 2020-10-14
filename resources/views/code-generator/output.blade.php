@@ -13,7 +13,9 @@
         <div class="col-3"></div>
         <div class="text-center col-6">
           @foreach ($bill as $b)
-          <input id="qr-text" type="text" class="form-control text-center" style="font-size: 20px;" value="{{$b->trackNumber}}" readonly>
+            <!-- QR value-->
+            <input id="qr-text" type="hidden" value="http://localhost/TMS4CMI/public/readQR?bill={{$b->trackNumber}}">
+            <input  type="text" class="form-control text-center" style="font-size: 20px;" value="{{$b->trackNumber}}" readonly>
           @endforeach
         </div>
         <div class="col-3"></div>
