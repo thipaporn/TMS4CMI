@@ -77,3 +77,7 @@ Route::get('/codeGeneratorInput', function () {
 Route::get('/codeGenerator', function () {
     return view('code-generator/output');
 });
+
+Route::get('/readQR', function () {
+    return view('read-QRcode/readQR');
+});
