@@ -52,6 +52,10 @@ Route::get('/typography', function () {
     return view('typography');
 });
 
+Route::get('/table', function () {
+    return view('basic-table');
+});
+
 /*--------------------------------------------------------------------*/
 
 Route::get('/home', function () {
@@ -66,6 +70,10 @@ Route::get('/queueManagement', function () {
     return view('queue-management/output');
 });
 
-Route::get('/codeGenerator', function () {
+Route::get('/codeGeneratorInput', function () {
     return view('code-generator/input');
+});
+
+Route::get('/codeGenerator', function () {
+    return view('code-generator/output');
 });
