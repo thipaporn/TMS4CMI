@@ -177,7 +177,8 @@
                                 <td> {{$b->name}} </td>
                                 <td> {{$b->trackNumber}} </td>
                                 <td>
-                                    <form action="codeGeneratorOutput" method="GET">
+                                    <form action="codeGeneratorOutput" method="POST">
+                                        @csrf
                                         <input type="hidden" name="bill" value="{{$b->trackNumber}}"/>
                                         <button type="submit" class="btn btn-gradient-info btn-rounded btn-fw">สร้าง</button>
                                     </form>

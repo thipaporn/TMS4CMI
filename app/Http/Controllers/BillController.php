@@ -13,7 +13,7 @@ class BillController extends Controller
     }
 
     public function billView(request $request){
-        $billNum = $request->input('bill');
+        $billNum = $_POST['bill'];
         $bill = DB::table('bill')->where(['trackNumber'=>$billNum])->get();
         return view('code-generator/output',['bill' => $bill]);
     }

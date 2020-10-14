@@ -70,6 +70,6 @@ Route::get('/queueManagement', function () {
     return view('queue-management/output');
 });
 
+/*---- QR Code ----*/
 Route::get('/codeGeneratorInput', 'App\Http\Controllers\BillController@bill');
-
-Route::get('/codeGeneratorOutput','App\Http\Controllers\BillController@billView');
+Route::post('/codeGeneratorOutput','App\Http\Controllers\BillController@billView');
