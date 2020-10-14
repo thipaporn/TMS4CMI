@@ -9,6 +9,12 @@ class BillController extends Controller
 {
     public function bill(){
         $bills = DB::table('bill')->get();
-        //return view('bill/view',['bills' => $bills]);
+        return view('code-generator/input',['bills' => $bills]);
+    }
+
+    public function billView(request $request){
+        $billNum = $request->input('bill');
+        $bill = DB::table('bill')->where(['trackNumber'=>$billNum])->get();
+        return view('code-generator/output',['bill' => $bill]);
     }
 }

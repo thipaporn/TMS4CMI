@@ -70,10 +70,6 @@ Route::get('/queueManagement', function () {
     return view('queue-management/output');
 });
 
-Route::get('/codeGeneratorInput', function () {
-    return view('code-generator/input');
-});
+Route::get('/codeGeneratorInput', 'App\Http\Controllers\BillController@bill');
 
-Route::get('/codeGenerator', function () {
-    return view('code-generator/output');
-});
+Route::get('/codeGeneratorOutput','App\Http\Controllers\BillController@billView');

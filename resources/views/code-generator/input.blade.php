@@ -172,21 +172,18 @@
                         </tr>
                       </thead>
                       <tbody>
-                        <tr>
-                          <td> Herman Beck </td>
-                          <td>11111111</td>
-                          <td> <button type="button" class="btn btn-gradient-info btn-rounded btn-fw">สร้าง</button> </td>
-                        </tr>
-                        <tr>
-                          <td> Messsy Adam </td>
-                          <td>22222222</td>
-                          <td> <button type="button" class="btn btn-gradient-info btn-rounded btn-fw">สร้าง</button> </td>
-                        </tr>
-                        <tr>
-                          <td> John Richards </td>
-                          <td>33333333</td>
-                          <td> <button type="button" class="btn btn-gradient-info btn-rounded btn-fw">สร้าง</button> </td>
-                        </tr>
+                          @foreach ($bills as $b)
+                            <tr>
+                                <td> {{$b->name}} </td>
+                                <td> {{$b->trackNumber}} </td>
+                                <td>
+                                    <form action="codeGeneratorOutput" method="GET">
+                                        <input type="hidden" name="bill" value="{{$b->trackNumber}}"/>
+                                        <button type="submit" class="btn btn-gradient-info btn-rounded btn-fw">สร้าง</button>
+                                    </form>
+                                </td>
+                            </tr>
+                          @endforeach
                       </tbody>
                     </table>
               </div>
@@ -211,6 +208,12 @@
     <!-- container-scroller -->
     <!-- plugins:js -->
     <script src="assets/vendors/js/vendor.bundle.base.js"></script>
+    <script type="text/javascript">
+        function nextPage(billNum) {
+           window.location.assign("{{URL::to('codeGeneratorOutput/?bill=')}}" + billNum);
+        }
+
+     </script>
     <!-- endinject -->
     <!-- Plugin js for this page -->
     <!-- End plugin js for this page -->
