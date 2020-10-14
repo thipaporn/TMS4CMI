@@ -52,6 +52,10 @@ Route::get('/typography', function () {
     return view('typography');
 });
 
+Route::get('/table', function () {
+    return view('basic-table');
+});
+
 /*--------------------------------------------------------------------*/
 
 Route::get('/home', function () {
