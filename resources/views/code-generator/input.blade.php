@@ -93,7 +93,6 @@
   @endsection
 
   @section('script')
-  <script src="assets/vendors/js/vendor.bundle.base.js"></script>
   <script type="text/javascript">
     function nextPage(billNum) {
       window.location.assign("{{URL::to('codeGeneratorOutput/?bill=')}}" + billNum);
