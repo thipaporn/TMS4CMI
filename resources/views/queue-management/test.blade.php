@@ -13,7 +13,7 @@
                 <div class="card">
                   <div class="card-body">
                    
-                    <form method ="get" action="{{ URL::to('/') }}" class="forms-sample" name="add_bill" id="add_bill">
+                    <form method ="get" class="forms-sample" name="add_bill" id="add_bill">
                       <div class="form-group">
                         <label for="type">ประเภทของรถขนส่ง</label>
                         <select class="form-control" id="type">
@@ -62,7 +62,7 @@
                       <div class="row">
                         <div class="col-md-3"></div>
                         <div class="col-md-6">
-                          <button name="submit" value="sub" type="submit" style="width:50%;font-size:20px;" class="btn btn-gradient-primary mr-2" formaction="/queueManagement">เพิ่มคิวรถ</button>
+                          <button name="submit" value="sub" type="submit" id="submit" style="width:50%;font-size:20px;" class="btn btn-gradient-primary mr-2" formaction="/queueManagement">เพิ่มคิวรถ</button>
                         </div>
                         <div class="col-md-3"></div>
                         <div class="col-md-12"><br /></div>
