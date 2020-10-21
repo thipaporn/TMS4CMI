@@ -1,8 +1,8 @@
 @extends('queue-management.base')
- 
+
 <!-- @yield('content-wrapper') -->
 <!-- @yield('script') -->
- 
+
 @section('content-wrapper')
 <div class="row">
   <div class="page-header col-lg-12">
@@ -85,21 +85,22 @@
 </div>
  
 @endsection
- 
+
 @section('script')
 <script>
 $(document).ready(function(){
         var i=1;
         $('.btn_add').click(function(){
           i++;
-        $('.dynamic_field').append('<div class="row"><div class="col-md-5"><div class="form-group"><input type="text" name="name[]" class="form-control" id="name" ></div></div><div class="col-md-5"><div class="form-group"><input type="text" name="number[]" class="form-control" id="number" ></div></div><div class="col-md-2"><button type="button" name="remove" id="'+i+'" class="btn btn-danger btn_remove">ลบ</button></div></div>');
+        $('.dynamic_field').append('<div class="row"><div class="col-md-5"><div class="form-group"><input type="text" name="name['+i+']" class="form-control" id="name" ></div></div><div class="col-md-5"><div class="form-group"><input type="text" name="number['+i+']" class="form-control" id="number" ></div></div><div class="col-md-2"><button type="button" name="remove" id="'+i+'" class="btn btn-danger btn_remove">ลบ</button></div></div>');
             });
-            
+
         $('.dynamic_field').on('click', '.btn_remove', function(){
           $(this).closest('div.row').remove();
+          i--;
         });
-       
-        $('#submit').click(function(){         
+
+        $('#submit').click(function(){
           $.ajax({
             url:"name.php",
             method:"POST",
@@ -111,8 +112,7 @@ $(document).ready(function(){
             }
           });
         });
-       
+
 });
 </script>
 @endsection
- 
