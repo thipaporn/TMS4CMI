@@ -68,6 +68,7 @@ Route::get('/queueManagementInput', function () {
 });
 
 Route::post('/queueManagement','App\Http\Controllers\QueueController@preQueue');
+// Route::get('/queueManagement','App\Http\Controllers\QueueController@index');
 
 
 /*---- QR Code ----*/
