@@ -34,6 +34,6 @@ class QueueController extends Controller
                 );
             }
         }
-        return view('queue-management/debug',['countBill' => $countBill, 'type' => $type, 'location' => $location, 'date' => $date ]);
+        return view('queue-management/output',['countBill' => $countBill, 'type' => $type, 'location' => $location, 'date' => $date ]);
     }
 }
