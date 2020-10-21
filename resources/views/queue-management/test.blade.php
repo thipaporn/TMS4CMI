@@ -1,45 +1,29 @@
 @extends('queue-management.base')
-
+ 
 <!-- @yield('content-wrapper') -->
 <!-- @yield('script') -->
-
+ 
 @section('content-wrapper')
-<div class="row">
-  <div class="page-header col-lg-12">
-    <h3>เพิ่มคิวรถ</h3>
-  </div>
-    <div class="col-md-12 grid-margin stretch-card">
-      <div class="card">
-        <div class="card-body">
-          <form method ="get" action="{{ URL::to('/') }}" class="forms-sample" name="add_bill" id="add_bill">
-            <div class="form-group">
-              <label for="type">ประเภทของรถขนส่ง</label>
-              <select class="form-control" id="type">
-                <option selected value="0">เลือก</option>
-                <option value="รถกระบะ">รถกระบะ</option>
-                <option value="รถบรรทุก">รถบรรทุก</option>
-              </select>
+<div class="page-header">
+              <h2>เพิ่มคิวรถ</h2>
             </div>
             <div class="row">
               <div class="col-md-2"></div>
               <div class="col-md-8 grid-margin stretch-card">
                 <div class="card">
                   <div class="card-body">
-
-                    <form method ="post" action="" class="forms-sample" name="add_bill" id="add_bill">
-                        @csrf
+                   
+                    <form method ="get" class="forms-sample" name="add_bill" id="add_bill">
                       <div class="form-group">
                         <label for="type">ประเภทของรถขนส่ง</label>
-                        <select class="form-control"name="type" id="type">
-                          <option selected value="0">เลือก</option>
+                        <select class="form-control" id="type">
                           <option value="รถกระบะ">รถกระบะ</option>
                           <option value="รถบรรทุก">รถบรรทุก</option>
                         </select>
                       </div>
                       <div class="form-group">
                         <label for="location">เส้นทางในการขนส่ง</label>
-                        <select class="form-control" name="location" id="location">
-                          <option selected value="0">เลือก</option>
+                        <select class="form-control" id="location">
                           <option value="เชียงใหม่">เชียงใหม่</option>
                           <option value="เชียงดาว-ฝาง">เชียงดาว-ฝาง</option>
                           <option value="ลำปาง">ลำปาง</option>
@@ -51,9 +35,9 @@
                       </div>
                       <div class="form-group">
                         <label for="date">วันที่จัดส่งสินค้า</label>
-                        <input type="date" name="date" class="form-control" id="date" >
+                        <input type="date" class="form-control" id="date" >
                       </div>
-
+                     
                       <div class="dynamic_field">
                           <div class="row">
                             <div class="col-md-5">
@@ -73,51 +57,29 @@
                             <button type="button" name="add" id="add" class="btn btn-success btn_add">เพิ่ม</button>
                             </div>
                           </div>
-                        </div>
-
+                        </div>  
+ 
                       <div class="row">
-                        <div class="col-md-12"><br /></div>
                         <div class="col-md-3"></div>
                         <div class="col-md-6">
-                          <button type="submit" style="width:100%;font-size:20px;" class="btn btn-gradient-primary mr-2">เพิ่มคิวรถ</button>
+                          <button name="submit" value="sub" type="submit" id="submit" style="width:50%;font-size:20px;" class="btn btn-gradient-primary mr-2" formaction="/queueManagement">เพิ่มคิวรถ</button>
                         </div>
                         <div class="col-md-3"></div>
                         <div class="col-md-12"><br /></div>
                         <div class="col-md-3"></div>
-                        <div class="col-md-6">
-                          <button style="width:100%;font-size:20px;" class="btn btn-light" onClick="javascript:history.go(-1)">ยกเลิก</button>
+                        <div class="col-md-12">
+                          <button name="cancel" value="can" style="width:50%;font-size:20px;" class="btn btn-light" formaction="/queueManagementInput">ยกเลิก</button>
                         </div>
-                        <div class="col-md-3"></div>
+                          <div class="col-md-3"></div>
                       </div>
-
+ 
                     </form>
                   </div>
                 </div>
               </div>
-
-            <div class="row">
-              <div class="col-md-12"><br /></div>
-              <div class="col-md-4"></div>
-              <div class="col-md-4">
-                <button type="submit" style="width:100%;font-size:20px;" class="btn btn-gradient-danger btn-icon-append"><i class="mdi mdi-note-plus"></i> เพิ่มคิวรถ</button>
-              </div>
-              <div class="col-md-4"></div>
-              <div class="col-md-12"><br /></div>
+              <div class="col-md-2"></div>
             </div>
-          </form>
-
-          <div class="row">
-            <div class="col-md-4"></div>
-            <div class="col-md-4">
-              <button style="width:100%;font-size:20px;" class="btn btn-gradient-primary btn-icon-text" onclick="window.location.href = '{{url('/queueManagement')}}';">ยกเลิก</button>
-            </div>
-            <div class="col-md-4"></div>
-          </div>
-        </div>
-      </div>
-    </div>
-</div>
-
+ 
 @endsection
 
 @section('script')
@@ -128,13 +90,12 @@ $(document).ready(function(){
           i++;
         $('.dynamic_field').append('<div class="row"><div class="col-md-5"><div class="form-group"><input type="text" name="name[]" class="form-control" id="name" ></div></div><div class="col-md-5"><div class="form-group"><input type="text" name="number[]" class="form-control" id="number" ></div></div><div class="col-md-2"><button type="button" name="remove" id="'+i+'" class="btn btn-danger btn_remove">ลบ</button></div></div>');
             });
-
+            
         $('.dynamic_field').on('click', '.btn_remove', function(){
           $(this).closest('div.row').remove();
-          i--;
         });
-
-        $('#submit').click(function(){
+       
+        $('#submit').click(function(){         
           $.ajax({
             url:"name.php",
             method:"POST",
@@ -146,7 +107,8 @@ $(document).ready(function(){
             }
           });
         });
-
+       
 });
 </script>
 @endsection
+ 

@@ -4,21 +4,27 @@
 <!-- @yield('script') -->
 
 @section('content-wrapper')
-<h2>สร้างคิวอาร์โค้ดและหมายเลขติดตามการขนส่ง</h2><br />
+
+<div class="row">
+  <div class="col-lg-6">
+    <h3>สร้างรหัสการติดตาม</h3>
+  </div>
+  <div class="col-lg-6 template-demo">
+    <form action="codeGeneratorInput" method="get">
+      <div class="form-group row">
+        <div class="col-lg-8">
+          <input type="text" name="search" class="form-control" placeholder="ค้นหาข้อมูล">
+        </div>
+        <div class="col-lg-2">
+          <button type="submit" class="btn btn-inverse-dark btn-fw">ค้นหา</button>
+        </div>
+      </div>
+    </form>
+  </div>
+
 <div class="col-md-12 grid-margin stretch-card">
   <div class="card">
     <div class="card-body">
-    <form action="codeGeneratorInput" method="get">
-      <div class="form-group row">
-        <h3 class="col-sm-2 col-form-label">ชื่อลูกค้า/บริษัท</h3>
-            <div class="col-lg-7">
-                <input type="text" name="search" class="form-control" placeholder="ชื่อลูกค้า หรือ ชื่อบริษัท">
-            </div>
-            <div class="col-lg-3">
-                <button type="submit" class="btn btn-inverse-dark btn-fw" style="font-size: 20px;">ค้นหา</button>
-            </div>
-      </div>
-    </form>
       <table class="table table-striped">
         <thead>
           @if(isset($_GET['search']))
@@ -91,7 +97,7 @@
     </div>
   </div>
   @endsection
-
+  </div>
   @section('script')
   <script type="text/javascript">
     function nextPage(billNum) {
