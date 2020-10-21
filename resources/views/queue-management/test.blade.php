@@ -13,7 +13,7 @@
                 <div class="card">
                   <div class="card-body">
                    
-                    <form method ="get" class="forms-sample" name="add_bill" id="add_bill">
+                    <form method ="get" action="{{ URL::to('/') }}" class="forms-sample" name="add_bill" id="add_bill">
                       <div class="form-group">
                         <label for="type">ประเภทของรถขนส่ง</label>
                         <select class="form-control" id="type">
@@ -68,8 +68,7 @@
                         <div class="col-md-12"><br /></div>
                         <div class="col-md-3"></div>
                         <div class="col-md-12">
-                          <button name="cancel" value="can" style="width:50%;font-size:20px;" class="btn btn-light" formaction="/home">ยกเลิก</button>
-                          <button style="width:100%;font-size:20px;" class="btn btn-light" onClick="javascript:history.go(-1)" formaction="/home">ยกเลิก</button>
+                          <button name="cancel" value="can" style="width:50%;font-size:20px;" class="btn btn-light" formaction="/queueManagementInput">ยกเลิก</button>
                         </div>
                           <div class="col-md-3"></div>
                       </div>
@@ -82,3 +81,34 @@
             </div>
  
 @endsection
+
+@section('script')
+<script>
+$(document).ready(function(){
+        var i=1;
+        $('.btn_add').click(function(){
+          i++;
+        $('.dynamic_field').append('<div class="row"><div class="col-md-5"><div class="form-group"><input type="text" name="name[]" class="form-control" id="name" ></div></div><div class="col-md-5"><div class="form-group"><input type="text" name="number[]" class="form-control" id="number" ></div></div><div class="col-md-2"><button type="button" name="remove" id="'+i+'" class="btn btn-danger btn_remove">ลบ</button></div></div>');
+            });
+            
+        $('.dynamic_field').on('click', '.btn_remove', function(){
+          $(this).closest('div.row').remove();
+        });
+       
+        $('#submit').click(function(){         
+          $.ajax({
+            url:"name.php",
+            method:"POST",
+            data:$('#add_bill').serialize(),
+            success:function(data)
+            {
+              alert(data);
+              $('#add_bill')[0].reset();
+            }
+          });
+        });
+       
+});
+</script>
+@endsection
+ 
