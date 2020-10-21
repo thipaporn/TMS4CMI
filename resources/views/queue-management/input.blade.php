@@ -1,8 +1,8 @@
 @extends('queue-management.base')
- 
+
 <!-- @yield('content-wrapper') -->
 <!-- @yield('script') -->
- 
+
 @section('content-wrapper')
 <div class="page-header">
               <h2>เพิ่มคิวรถ</h2>
@@ -12,7 +12,7 @@
               <div class="col-md-8 grid-margin stretch-card">
                 <div class="card">
                   <div class="card-body">
-                   
+
                     <form method ="get" action="{{ URL::to('/') }}" class="forms-sample" name="add_bill" id="add_bill">
                       <div class="form-group">
                         <label for="type">ประเภทของรถขนส่ง</label>
@@ -39,19 +39,19 @@
                         <label for="date">วันที่จัดส่งสินค้า</label>
                         <input type="date" class="form-control" id="date" >
                       </div>
-                     
+
                       <div class="dynamic_field">
                           <div class="row">
                             <div class="col-md-5">
                               <div class="form-group">
                                 <label for="name">ชื่อลูกค้า</label>
-                                <input type="text" name="name[]" class="form-control" id="name" >
+                                <input type="text" name="name[1]" class="form-control" id="name" >
                               </div>
                             </div>
                             <div class="col-md-5">
                               <div class="form-group">
                               <label for="number">เลขที่บิล</label>
-                                <input type="text" name="number[]" class="form-control" id="number" >
+                                <input type="text" name="number[1]" class="form-control" id="number" >
                               </div>
                             </div>
                             <div class="col-md-2">
@@ -59,8 +59,8 @@
                             <button type="button" name="add" id="add" class="btn btn-success btn_add">เพิ่ม</button>
                             </div>
                           </div>
-                        </div>  
- 
+                        </div>
+
                       <div class="row">
                         <div class="col-md-12"><br /></div>
                         <div class="col-md-3"></div>
@@ -79,30 +79,31 @@
                         </div>
                         <div class="col-md-3"></div>
                       </div>
- 
+
                     </form>
                   </div>
                 </div>
               </div>
               <div class="col-md-2"></div>
             </div>
- 
+
 @endsection
- 
+
 @section('script')
 <script>
 $(document).ready(function(){
         var i=1;
         $('.btn_add').click(function(){
           i++;
-        $('.dynamic_field').append('<div class="row"><div class="col-md-5"><div class="form-group"><input type="text" name="name[]" class="form-control" id="name" ></div></div><div class="col-md-5"><div class="form-group"><input type="text" name="number[]" class="form-control" id="number" ></div></div><div class="col-md-2"><button type="button" name="remove" id="'+i+'" class="btn btn-danger btn_remove">ลบ</button></div></div>');
+        $('.dynamic_field').append('<div class="row"><div class="col-md-5"><div class="form-group"><input type="text" name="name['+i+']" class="form-control" id="name" ></div></div><div class="col-md-5"><div class="form-group"><input type="text" name="number['+i+']" class="form-control" id="number" ></div></div><div class="col-md-2"><button type="button" name="remove" id="'+i+'" class="btn btn-danger btn_remove">ลบ</button></div></div>');
             });
-            
+
         $('.dynamic_field').on('click', '.btn_remove', function(){
           $(this).closest('div.row').remove();
+          i--;
         });
-       
-        $('#submit').click(function(){         
+
+        $('#submit').click(function(){
           $.ajax({
             url:"name.php",
             method:"POST",
@@ -114,8 +115,7 @@ $(document).ready(function(){
             }
           });
         });
-       
+
 });
 </script>
 @endsection
- 
