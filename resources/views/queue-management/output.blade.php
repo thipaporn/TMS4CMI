@@ -63,10 +63,15 @@
             </div>
             <div class="col-lg-4"></div>
             <div class="col-lg-6">
-              <button type="button" class="btn btn-gradient-danger btn-icon-append">
-              <i class="mdi mdi-note-plus"></i>เพิ่มข้อมูล</button>
-              <button type="button" class="btn btn-gradient-primary btn-icon-text">
-              <i class="mdi mdi-file-check btn-icon-prepend"></i> ยืนยัน </button></div>
+              <a class="nav-link" href="queueManagementInput">
+                <button type="button" class="btn btn-gradient-danger btn-icon-append">
+                <i class="mdi mdi-note-plus"></i>เพิ่มข้อมูล</button>
+              </a>
+              <a class="nav-link" href="home">
+                <button onclick="" type="button" class="btn btn-gradient-primary btn-icon-text">
+                <i class="mdi mdi-file-check btn-icon-prepend"></i> ยืนยัน </button></div>
+              </a>
+              
           </div>
 
 @endsection
