@@ -44,7 +44,7 @@
         </div>
         <div class="col-lg-2"></div>
       </div>
-      <form action="updateStatus" method="POST">
+      <form>
         <div class="row">
           <div class="col-lg-3"></div>
 
@@ -52,10 +52,11 @@
           <input type="hidden" name="billNum" value="{{$b->trackNumber}}" />
           <input type="hidden" name="billStatus" value="{{$b->status}}" />
           @if ($b->status != 'complete')
-          <button type="submit" class="btn btn-gradient-primary btn-lg btn-block col-lg-6" style="font-size: 20px;"> อัปเดตสถานะ </button>
+          <button type="button" onclick="fncAction0(billNum.value)" class="btn btn-gradient-primary btn-lg btn-block col-lg-6" style="font-size: 20px;"> อัปเดตสถานะ </button>
           @endif
 
           <div class="col-lg-3"></div>
+          
         </div>
       </form>
     </div>
@@ -64,34 +65,29 @@
   @endsection
 
   @section('script')
-  <!-- <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
   <script type="text/javascript">
-    function fncAction0(billNum,billStatus) {
+    function fncAction0(billNum) {
       Swal.fire({
-        title: 'Are you sure?',
-        text: "You won't be able to revert this!",
-        icon: 'warning',
+        title: 'ต้องการอัปเดตสถานะ?',
+        icon: 'info',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
         cancelButtonColor: '#d33',
-        confirmButtonText: 'Yes, delete it!'
+        confirmButtonText: 'ใช่',
+        cancelButtonText: 'ไม่'
       }).then((result) => {
-          if (result.isConfirmed) {
-            Swal.fire(
-              'Deleted!',
-              'Your file has been deleted.',
-              'success'
-            )
-            setTimeout(function(billNum) {
-              window.location.assign("{{URL::to('/updateStatus?billNum=')}}" + billNum)
-              window.location.assign("{{URL::to('/updateStatus?billStatus=')}}" + billStatus);
-            }, 2000);
-            setTimeout(function(billStatus) {
-              window.location.assign("{{URL::to('/updateStatus?billStatus=')}}" + billStatus);
-            }, 2000);
-          
+        if (result.isConfirmed) {
+          Swal.fire(
+            'Deleted!',
+            'Your file has been deleted.',
+            'success'
+          )
+          setTimeout(function() {
+            window.location.assign("/TMS4CMI/public/updateStatus?billNum=" + billNum);
+          }, 2000);
         }
-      })
+      });
     }
-  </script> -->
+  </script>
   @endsection

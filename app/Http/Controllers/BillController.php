@@ -29,12 +29,15 @@ class BillController extends Controller
     }
 
     public function update(request $request){
-        $billNum = $_POST['billNum'];
+        $billNum = $request->input('billNum');
         $bill = DB::table('update_status')
             ->where(['trackNumber'=>$billNum])
             ->orderBy('updateDate', 'DESC')->take(1)->get();
         $name = DB::table('bill');
-        $billStatus = $_POST['billStatus'];
+        $billStatus = DB::table('update_status')
+            ->where(['trackNumber'=>$billNum])
+            ->orderBy('updateDate', 'DESC')->take(1)
+            ->value('status');
         if($billStatus == 'order'){
             $billStatus = 'processing';
         }elseif($billStatus == 'processing'){
