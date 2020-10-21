@@ -67,6 +67,7 @@ Route::get('/queueManagementInput', function () {
     //return view('queue-management/test');
 });
 
+Route::get('/queueManagement','App\Http\Controllers\QueueController@showQueue');
 Route::post('/queueManagement','App\Http\Controllers\QueueController@preQueue');
 
 
