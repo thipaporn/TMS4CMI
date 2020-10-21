@@ -13,10 +13,11 @@
                 <div class="card">
                   <div class="card-body">
 
-                    <form method ="get" action="{{ URL::to('/') }}" class="forms-sample" name="add_bill" id="add_bill">
+                    <form method ="post" action="" class="forms-sample" name="add_bill" id="add_bill">
+                        @csrf
                       <div class="form-group">
                         <label for="type">ประเภทของรถขนส่ง</label>
-                        <select class="form-control" id="type">
+                        <select class="form-control"name="type" id="type">
                           <option selected value="0">เลือก</option>
                           <option value="รถกระบะ">รถกระบะ</option>
                           <option value="รถบรรทุก">รถบรรทุก</option>
@@ -24,7 +25,7 @@
                       </div>
                       <div class="form-group">
                         <label for="location">เส้นทางในการขนส่ง</label>
-                        <select class="form-control" id="location">
+                        <select class="form-control" name="location" id="location">
                           <option selected value="0">เลือก</option>
                           <option value="เชียงใหม่">เชียงใหม่</option>
                           <option value="เชียงดาว-ฝาง">เชียงดาว-ฝาง</option>
@@ -37,7 +38,7 @@
                       </div>
                       <div class="form-group">
                         <label for="date">วันที่จัดส่งสินค้า</label>
-                        <input type="date" class="form-control" id="date" >
+                        <input type="date" name="date" class="form-control" id="date" >
                       </div>
 
                       <div class="dynamic_field">
@@ -45,13 +46,13 @@
                             <div class="col-md-5">
                               <div class="form-group">
                                 <label for="name">ชื่อลูกค้า</label>
-                                <input type="text" name="name[1]" class="form-control" id="name" >
+                                <input type="text" name="name[]" class="form-control" id="name" >
                               </div>
                             </div>
                             <div class="col-md-5">
                               <div class="form-group">
                               <label for="number">เลขที่บิล</label>
-                                <input type="text" name="number[1]" class="form-control" id="number" >
+                                <input type="text" name="number[]" class="form-control" id="number" >
                               </div>
                             </div>
                             <div class="col-md-2">
@@ -91,7 +92,7 @@ $(document).ready(function(){
         var i=1;
         $('.btn_add').click(function(){
           i++;
-        $('.dynamic_field').append('<div class="row"><div class="col-md-5"><div class="form-group"><input type="text" name="name['+i+']" class="form-control" id="name" ></div></div><div class="col-md-5"><div class="form-group"><input type="text" name="number['+i+']" class="form-control" id="number" ></div></div><div class="col-md-2"><button type="button" name="remove" id="'+i+'" class="btn btn-danger btn_remove">ลบ</button></div></div>');
+        $('.dynamic_field').append('<div class="row"><div class="col-md-5"><div class="form-group"><input type="text" name="name[]" class="form-control" id="name" ></div></div><div class="col-md-5"><div class="form-group"><input type="text" name="number[]" class="form-control" id="number" ></div></div><div class="col-md-2"><button type="button" name="remove" id="'+i+'" class="btn btn-danger btn_remove">ลบ</button></div></div>');
             });
 
         $('.dynamic_field').on('click', '.btn_remove', function(){
