@@ -69,6 +69,7 @@
                         <div class="col-md-3"></div>
                         <div class="col-md-12">
                           <button name="cancel" value="can" style="width:50%;font-size:20px;" class="btn btn-light" formaction="/home">ยกเลิก</button>
+                          <button style="width:100%;font-size:20px;" class="btn btn-light" onClick="javascript:history.go(-1)" formaction="/home">ยกเลิก</button>
                         </div>
                           <div class="col-md-3"></div>
                       </div>
