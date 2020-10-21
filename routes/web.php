@@ -63,8 +63,8 @@ Route::get('/home', function () {
 });
 
 Route::get('/queueManagementInput', function () {
-    /* return view('queue-management/input'); */
-    return view('queue-management/test');
+    return view('queue-management/input');
+    //return view('queue-management/test');
 });
 
 Route::get('/queueManagement', function () {
