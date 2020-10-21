@@ -34,6 +34,12 @@ class QueueController extends Controller
                 );
             }
         }
-        return view('queue-management/output',['countBill' => $countBill, 'type' => $type, 'location' => $location, 'date' => $date ]);
+        $scheds = DB::table('pre_schedule')->get();
+        return view('queue-management/output',['countBill' => $countBill, 'type' => $type, 'location' => $location, 'date' => $date ,'scheds' => $scheds]);
     }
+
+    // public function show(){
+    //     $scheds = DB::table('pre_schedule')::all()->get();
+    //     return view('queue-management/output',['scheds' => $scheds]);
+    // }
 }

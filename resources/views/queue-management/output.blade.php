@@ -9,7 +9,7 @@
     <h3>จัดคิวรถขนส่ง</h3>
   </div>
   <div class="col-lg-6 template-demo">
-    <form action="queueManagement" method="get">
+    <form action="queueManagement" method="post">
       <div class="form-group row">
         <div class="col-lg-8">
           <input type="text" name="search" class="form-control" placeholder="ค้นหาข้อมูล">
@@ -35,22 +35,17 @@
             </tr>
           </thead>
           <tbody>
+            
+            @foreach($scheds as $row)
             <tr>
-              <td class="py-1">#number</td>
-              <td>#name</td>
-              <td>#CarType</td>
-              <td>#CarNum</td>
-              <td>#location</td>
-              <td>#billNumber</td>
+              <td></td>
+              <td></td>
+              <td>{{$row->type}}</td>
+              <td></td>
+              <td>{{$row->dest}}</td>
+              <td>{{$row->trackNumber}}</td>
             </tr>
-            <tr>
-              <td class="py-1">#number</td>
-              <td>#name</td>
-              <td>#CarType</td>
-              <td>#CarNum</td>
-              <td>#location</td>
-              <td>#billNumber</td>
-            </tr>
+            @endforeach
           </tbody>
         </table>
       </div>
