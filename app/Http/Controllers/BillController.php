@@ -29,18 +29,21 @@ class BillController extends Controller
     }
 
     public function update(request $request){
-        $billNum = $_POST['billNum'];
+        $billNum = $request->input('billNum');
         $bill = DB::table('update_status')
             ->where(['trackNumber'=>$billNum])
             ->orderBy('updateDate', 'DESC')->take(1)->get();
         $name = DB::table('bill');
-        $billStatus = $_POST['billStatus'];
-        if($billStatus == 'order'){
-            $billStatus = 'processing';
-        }elseif($billStatus == 'processing'){
-            $billStatus = 'shipping';
-        }elseif($billStatus == 'shipping'){
-            $billStatus = 'complete';
+        $billStatus = DB::table('update_status')
+            ->where(['trackNumber'=>$billNum])
+            ->orderBy('updateDate', 'DESC')->take(1)
+            ->value('status');
+        if($billStatus == 'รับออเดอร์เข้าระบบ'){
+            $billStatus = 'กำลังจัดเตรียมสินค้า';
+        }elseif($billStatus == 'กำลังจัดเตรียมสินค้า'){
+            $billStatus = 'อยู่ในระหว่างการขนส่ง';
+        }elseif($billStatus == 'อยู่ในระหว่างการขนส่ง'){
+            $billStatus = 'จัดส่งสินค้าเรียบร้อยแล้ว';
         }else{
             $billStatus = 'ERROR';
         }

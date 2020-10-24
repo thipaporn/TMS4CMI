@@ -189,6 +189,7 @@
                 </tr>
                 <?php $count++ ?>
             @endforeach
+            <!-- @endforeach -->
           </tbody>
         </table>
       </div>
@@ -214,4 +215,31 @@
 
 </div>
 
+@endsection
+@section('script')
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+<script type="text/javascript">
+  function fncAction0(billNum) {
+    Swal.fire({
+      title: 'ยืนยันข้อมูลการจัดคิวรถ?',
+      icon: 'info',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'ใช่',
+      cancelButtonText: 'ไม่'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire(
+          'Deleted!',
+          'Your file has been deleted.',
+          'success'
+        )
+        setTimeout(function() {
+          window.location.assign("/TMS4CMI/public/updateStatus?billNum=" + billNum);
+        }, 2000);
+      }
+    });
+  }
+</script>
 @endsection
