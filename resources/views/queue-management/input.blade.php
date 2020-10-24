@@ -9,11 +9,10 @@
     <div class="col-md-12 grid-margin stretch-card">
       <div class="card">
         <div class="card-body">
-          <form method ="post" action="queueManagement" class="forms-sample" name="add_bill" id="add_bill">
-            @csrf
+          <form method ="get" action="{{ URL::to('/') }}" class="forms-sample" name="add_bill" id="add_bill">
             <div class="form-group">
               <label for="type">ประเภทของรถขนส่ง</label>
-              <select class="form-control" name="type">
+              <select class="form-control" id="type">
                 <option selected value="0">เลือก</option>
                 <option value="รถกระบะ">รถกระบะ</option>
                 <option value="รถบรรทุก">รถบรรทุก</option>
@@ -21,7 +20,7 @@
             </div>
             <div class="form-group">
               <label for="location">เส้นทางในการขนส่ง</label>
-              <select class="form-control" name="location">
+              <select class="form-control" id="location">
                 <option selected value="0">เลือก</option>
                 <option value="เชียงใหม่">เชียงใหม่</option>
                 <option value="เชียงดาว-ฝาง">เชียงดาว-ฝาง</option>
@@ -34,7 +33,7 @@
             </div>
             <div class="form-group">
               <label for="date">วันที่จัดส่งสินค้า</label>
-              <input type="date" class="form-control" name="date" >
+              <input type="date" class="form-control" id="date" >
             </div>
             <div class="dynamic_field">
                 <div class="row">
