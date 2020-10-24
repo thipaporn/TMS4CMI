@@ -38,12 +38,12 @@ class BillController extends Controller
             ->where(['trackNumber'=>$billNum])
             ->orderBy('updateDate', 'DESC')->take(1)
             ->value('status');
-        if($billStatus == 'order'){
-            $billStatus = 'processing';
-        }elseif($billStatus == 'processing'){
-            $billStatus = 'shipping';
-        }elseif($billStatus == 'shipping'){
-            $billStatus = 'complete';
+        if($billStatus == 'รับออเดอร์เข้าระบบ'){
+            $billStatus = 'กำลังจัดเตรียมสินค้า';
+        }elseif($billStatus == 'กำลังจัดเตรียมสินค้า'){
+            $billStatus = 'อยู่ในระหว่างการขนส่ง';
+        }elseif($billStatus == 'อยู่ในระหว่างการขนส่ง'){
+            $billStatus = 'จัดส่งสินค้าเรียบร้อยแล้ว';
         }else{
             $billStatus = 'ERROR';
         }

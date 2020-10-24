@@ -37,24 +37,17 @@
             </tr>
           </thead>
           <tbody>
+          @foreach($orders as $index => $order)
             <tr>
-              <td class="py-1">#number</td>
-              <td>#name</td>
-              <td>#CarType</td>
-              <td>#CarNum</td>
-              <td>#location</td>
-              <td>#billNumber</td>
-              <td>#status</td>
+              <td class="py-1">{{$index + 1}}</td>
+              <td>{{$order->name}}</td>
+              <td>{{$order->type}}</td>
+              <td>{{$order->carNumber}}</td>
+              <td>{{$order->dest}}</td>
+              <td>{{$order->trackNumber}}</td>
+              <td>{{$order->status}}</td>
             </tr>
-            <tr>
-              <td class="py-1">#number</td>
-              <td>#name</td>
-              <td>#CarType</td>
-              <td>#CarNum</td>
-              <td>#location</td>
-              <td>#billNumber</td>
-              <td>#status</td>
-            </tr>
+          @endforeach
           </tbody>
         </table>
       </div>
