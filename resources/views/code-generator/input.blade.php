@@ -22,82 +22,82 @@
     </form>
   </div>
 
-<div class="col-md-12 grid-margin stretch-card">
-  <div class="card">
-    <div class="card-body">
-      <table class="table table-striped">
-        <thead>
-          @if(isset($_GET['search']))
+  <div class="col-md-12 grid-margin stretch-card">
+    <div class="card">
+      <div class="card-body">
+        <table class="table table-striped">
+          <thead>
+            @if(isset($_GET['search']))
             <?php
-              $search = strtolower($_GET['search']);
-              $row = 0;
+            $search = strtolower($_GET['search']);
+            $row = 0;
             ?>
             @foreach ($bills as $b)
-              @if(str_contains(strtolower($b->name), $search) || str_contains(strtolower($b->trackNumber), $search))
-                <?php $row++; ?>
-              @endif
+            @if(str_contains(strtolower($b->name), $search) || str_contains(strtolower($b->trackNumber), $search))
+            <?php $row++; ?>
+            @endif
             @endforeach
             @if ($row != 0)
-              <tr>
-                <th> ชื่อ </th>
-                <th> เลขที่บิล </th>
-                <th> </th>
-              </tr>
+            <tr>
+              <th> ชื่อ </th>
+              <th> เลขที่บิล </th>
+              <th> </th>
+            </tr>
             @endif
-          @else
-          <tr>
-            <th> ชื่อ </th>
-            <th> เลขที่บิล </th>
-            <th> </th>
-          </tr>
-          @endif
-        </thead>
-        <tbody>
-          @if (isset($_GET['search']))
+            @else
+            <tr>
+              <th> ชื่อ </th>
+              <th> เลขที่บิล </th>
+              <th> </th>
+            </tr>
+            @endif
+          </thead>
+          <tbody>
+            @if (isset($_GET['search']))
             <?php
-              $search = strtolower($_GET['search']);
-              $row = 0;
+            $search = strtolower($_GET['search']);
+            $row = 0;
             ?>
             @foreach ($bills as $b)
-                @if(str_contains(strtolower($b->name), $search) || str_contains(strtolower($b->trackNumber), $search))
-                    <?php $row++; ?>
-                    <tr>
-                        <td> {{$b->name}} </td>
-                        <td> {{$b->trackNumber}} </td>
-                        <td>
-                        <form action="codeGeneratorOutput" method="POST">
-                        @csrf
-                          <input type="hidden" name="bill" value="{{$b->trackNumber}}" />
-                          <button type="submit" class="btn btn-gradient-info btn-rounded btn-fw">สร้าง</button>
-                        </form>
-                        </td>
-                      </tr>
-                @endif
+            @if(str_contains(strtolower($b->name), $search) || str_contains(strtolower($b->trackNumber), $search))
+            <?php $row++; ?>
+            <tr>
+              <td> {{$b->name}} </td>
+              <td> {{$b->trackNumber}} </td>
+              <td>
+                <form action="codeGeneratorOutput" method="POST">
+                  @csrf
+                  <input type="hidden" name="bill" value="{{$b->trackNumber}}" />
+                  <button type="submit" class="btn btn-gradient-info btn-rounded btn-fw">สร้าง</button>
+                </form>
+              </td>
+            </tr>
+            @endif
             @endforeach
             @if ($row = 0)
-                <h3>Not Found {{$_GET['search']}}</h3>
+            <h3>Not Found {{$_GET['search']}}</h3>
             @endif
-          @else
+            @else
             @foreach ( $bills as $b)
             <tr>
               <td> {{$b->name}} </td>
               <td> {{$b->trackNumber}} </td>
               <td>
-              <form action="codeGeneratorOutput" method="POST">
-              @csrf
-                <input type="hidden" name="bill" value="{{$b->trackNumber}}" />
-                <button type="submit" class="btn btn-gradient-info btn-rounded btn-fw">สร้าง</button>
-              </form>
+                <form action="codeGeneratorOutput" method="POST">
+                  @csrf
+                  <input type="hidden" name="bill" value="{{$b->trackNumber}}" />
+                  <button type="submit" class="btn btn-gradient-info btn-rounded btn-fw">สร้าง</button>
+                </form>
               </td>
             </tr>
             @endforeach
-          @endif
-        </tbody>
-      </table>
+            @endif
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
   @endsection
-  </div>
   @section('script')
   <script type="text/javascript">
     function nextPage(billNum) {
