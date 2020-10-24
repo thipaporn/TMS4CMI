@@ -1,19 +1,33 @@
 <?php
- 
+
 namespace App\Http\Controllers;
- 
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use PHPUnit\TextUI\XmlConfiguration\Group;
 
 class QueueController extends Controller
 {
-    public function showQueue()
-    {
-        $scheds = DB::table('pre_schedule')->get();
-        return view('queue-management/output', ['scheds' => $scheds]);
+    public function showQueue(){
+        $pre = DB::table('pre_schedule')->orderBy('startDate', 'ASC')->get();
+        $driver = DB::table('driver')->selectRaw('id,name,number,type')
+        ->Join('car','driver.id','=','car.driver_id')->get();
+
+        $firstDay = date('Y-m-01', strtotime('now'));
+        $lastDay = date('Y-m-t', strtotime('now'));
+
+        $schedule = DB::table('driver_schedule')
+        ->where( 'startDate','>=',$firstDay)->where( 'startDate','<=',$lastDay)->get();
+
+        $sumDist = DB::table('driver_schedule')->selectRaw('id,sum(dist) as dist')
+        ->where( 'startDate','>=',$firstDay)->where( 'startDate','<=',$lastDay)
+        ->groupBY('id')->get();
+
+        $dist = DB::table('prov_dist')->get();
+
+        return view('queue-management/output',['driver' => $driver, 'pre' => $pre, 'schedule'=>$schedule,'sumDist'=>$sumDist, 'dist'=>$dist]);
     }
- 
+
     public function preQueue(request $request){
         $type = $_POST['type'];
         $location = $_POST['location'];
@@ -40,8 +54,23 @@ class QueueController extends Controller
                 );
             }
         }
-        $scheds = DB::table('pre_schedule')->get();
-        return view('queue-management/output', ['countBill' => $countBill, 'type' => $type, 'location' => $location, 'date' => $date, 'scheds' => $scheds]);
+        $pre = DB::table('pre_schedule')->orderBy('startDate', 'ASC')->get();
+        $driver = DB::table('driver')->selectRaw('id,name,number,type')
+        ->Join('car','driver.id','=','car.driver_id')->get();
+
+        $firstDay = date('Y-m-01', strtotime($date));
+        $lastDay = date('Y-m-t', strtotime($date));
+
+        $schedule = DB::table('driver_schedule')
+        ->where( 'startDate','>=',$firstDay)->where( 'startDate','<=',$lastDay)->get();
+
+        $sumDist = DB::table('driver_schedule')->selectRaw('id,sum(dist) as dist')
+        ->where( 'startDate','>=',$firstDay)->where( 'startDate','<=',$lastDay)
+        ->groupBY('id')->get();
+
+        $dist = DB::table('prov_dist')->get();
+
+        return view('queue-management/output',['driver' => $driver, 'pre' => $pre, 'schedule'=>$schedule,'sumDist'=>$sumDist, 'dist'=>$dist]);
     }
 
     public function showStatus()
@@ -54,7 +83,7 @@ class QueueController extends Controller
         $i = 0;
         return view('home',['orders' => $orders, 'i' => $i]);
     }
- 
+
     // public function show(){
     //     $scheds = DB::table('pre_schedule')::all()->get();
     //     return view('queue-management/output',['scheds' => $scheds]);
