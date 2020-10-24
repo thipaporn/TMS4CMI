@@ -1,17 +1,17 @@
 <?php
-
+ 
 namespace App\Http\Controllers;
-
+ 
 use Illuminate\Http\Request;
 use DB;
-
+ 
 class QueueController extends Controller
 {
     public function showQueue(){
         $drivers = DB::table('driver')->get();
         return view('queue-management/output',['drivers' => $drivers]);
     }
-
+ 
     public function preQueue(request $request){
         $type = $_POST['type'];
         $location =$_POST['location'];
@@ -34,10 +34,14 @@ class QueueController extends Controller
                 );
             }
         }
-        $scheds = DB::table('pre_schedule')->get();
-        return view('queue-management/output',['countBill' => $countBill, 'type' => $type, 'location' => $location, 'date' => $date ,'scheds' => $scheds]);
+        $scheds = DB::table('driver_schedule_temp')->get();
+        $drivers = DB::table('driver')->get();
+        $cars = DB::table('car')->get();
+        $bills = DB::table('bill')->get();
+        return view('queue-management/output',['countBill' => $countBill, 'type' => $type, 'location' => $location, 'date' => $date ,'scheds' => $scheds,'drivers' => $drivers,'cars' => $cars
+        ,'bills' => $bills]);
     }
-
+ 
     // public function show(){
     //     $scheds = DB::table('pre_schedule')::all()->get();
     //     return view('queue-management/output',['scheds' => $scheds]);
