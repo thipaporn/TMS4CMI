@@ -2,7 +2,7 @@
  
 <!-- @yield('content-wrapper') -->
 <!-- @yield('script') -->
-
+ 
 @section('content-wrapper')
 <div class="row">
   <div class="col-lg-6">
@@ -35,17 +35,25 @@
             </tr>
           </thead>
           <tbody>
-            
-            @foreach($scheds as $row)
+            {{$drivers}}
+            {{$cars}}
+            {{$bills}}
+            <!-- @foreach($scheds as $row) -->
+            @foreach($drivers as $driver)
+            @foreach($cars as $car)
+            @foreach($bills as $bill)
             <tr>
-              <td></td>
-              <td></td>
-              <td>{{$row->type}}</td>
-              <td></td>
-              <td>{{$row->dest}}</td>
-              <td>{{$row->trackNumber}}</td>
+              <td>{{$row->id}}</td>
+              <td>{{$driver->name}}</td>
+              <td>{{$car->type}}</td>
+              <td>{{$car->number}}</td>
+              <td>{{$bill->dest}}</td>
+              <td>{{$bill->trackNumber}}</td>
             </tr>
             @endforeach
+            @endforeach
+            @endforeach
+            <!-- @endforeach -->
           </tbody>
         </table>
       </div>
@@ -68,7 +76,7 @@
     </div>
     <div class="col-lg-4"></div>
   </div>
-
+ 
 </div>
-
+ 
 @endsection
