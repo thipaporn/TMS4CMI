@@ -1,7 +1,7 @@
 <?php
-
+ 
 namespace App\Http\Controllers;
-
+ 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use PHPUnit\TextUI\XmlConfiguration\Group;
@@ -13,9 +13,8 @@ class QueueController extends Controller
         $scheds = DB::table('pre_schedule')->get();
         return view('queue-management/output', ['scheds' => $scheds]);
     }
-
-    public function preQueue(request $request)
-    {
+ 
+    public function preQueue(request $request){
         $type = $_POST['type'];
         $location = $_POST['location'];
         $date = $_POST['date'];
@@ -55,7 +54,7 @@ class QueueController extends Controller
         $i = 0;
         return view('home',['orders' => $orders, 'i' => $i]);
     }
-
+ 
     // public function show(){
     //     $scheds = DB::table('pre_schedule')::all()->get();
     //     return view('queue-management/output',['scheds' => $scheds]);
