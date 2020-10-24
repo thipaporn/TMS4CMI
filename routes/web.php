@@ -58,17 +58,13 @@ Route::get('/table', function () {
 
 /*--------------------------------------------------------------------*/
 
-Route::get('/home', function () {
-    return view('home');
-});
-
 Route::get('/queueManagementInput', function () {
     return view('queue-management/input');
     //return view('queue-management/test');
 });
 
 // home
-Route::get('/','App\Http\Controllers\QueueController@showStatus');
+Route::get('/home','App\Http\Controllers\QueueController@showStatus');
 
 Route::get('/queueManagement','App\Http\Controllers\QueueController@showQueue');
 Route::post('/queueManagement','App\Http\Controllers\QueueController@preQueue');
