@@ -35,9 +35,7 @@
             </tr>
           </thead>
           <tbody>
-            {{$drivers}}
-            {{$cars}}
-            {{$bills}}
+            
             <!-- @foreach($scheds as $row) -->
             @foreach($drivers as $driver)
             @foreach($cars as $car)

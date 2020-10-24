@@ -33,6 +33,7 @@
               <th>หมายเลขรถ</th>
               <th>สถานที่</th>
               <th>เลขที่บิล</th>
+              <th>วันที่จัดส่ง</th>
               <th>สถานะการขนส่ง</th>
             </tr>
           </thead>
@@ -45,6 +46,7 @@
               <td>{{$order->carNumber}}</td>
               <td>{{$order->dest}}</td>
               <td>{{$order->trackNumber}}</td>
+              <td>{{$order->startDate}}</td>
               <td>{{$order->status}}</td>
             </tr>
           @endforeach
