@@ -21,8 +21,10 @@
     </form>
   </div>
   <?php
-    //echo $dist;
+    //echo $pre;
   ?>
+  <form action="addQueue" method="post">
+    @csrf
   <div class="col-lg-12 grid-margin stretch-card">
     <div class="card">
       <div class="card-body">
@@ -101,6 +103,9 @@
                                 $cal[$driverId[0]] = pow(($a + $distValue->dist - $x),2) + pow(($b - $x),2);
                                 $cal[$driverId[1]] = pow(($a - $x),2) + pow(($b + $distValue->dist - $x),2);
 
+                                $cal[$driverId[0]] = sqrt($cal[$driverId[0]]);
+                                $cal[$driverId[1]] = sqrt($cal[$driverId[1]]);
+
                                 foreach ($driver as $d) {
                                     if( $cal[$driverId[0]] <= $cal[$driverId[1]] ){
                                         if($d->id == $driverId[0]){
@@ -134,6 +139,10 @@
                                 $cal[$driverId[0]] = pow(($a + $distValue->dist - $x),2)  + pow(($b - $x),2) + pow(($c - $x),2);
                                 $cal[$driverId[1]] = pow(($a - $x),2)  + pow(($b + $distValue->dist - $x),2) + pow(($c - $x),2);
                                 $cal[$driverId[2]] = pow(($a - $x),2)  + pow(($b - $x),2) + pow(($c + $distValue->dist - $x),2);
+
+                                $cal[$driverId[0]] = sqrt($cal[$driverId[0]]/2 );
+                                $cal[$driverId[1]] = sqrt($cal[$driverId[1]]/2 );
+                                $cal[$driverId[2]] = sqrt($cal[$driverId[2]]/2 );
 
                                 foreach ($driver as $d) {
                                     if( $cal[$driverId[0]] <= $cal[$driverId[1]] && $cal[$driverId[0]] <= $cal[$driverId[2]] ){
@@ -180,16 +189,27 @@
                     //print_r($driverDist);
                 ?>
                 <tr>
-                <td>{{$count}}</td>
-                <td>{{$driverName}}</td>
-                <td>{{$row->type}}</td>
-                <td>{{$driverNumber}}</td>
-                <td>{{$row->dest}}</td>
-                <td>{{$row->trackNumber}}</td>
+                    <td>{{$count}}</td>
+                    <td>{{$driverName}}</td>
+                    <td>{{$row->type}}</td>
+                    <td>{{$driverNumber}}</td>
+                    <td>{{$row->dest}}</td>
+                    <td>{{$row->trackNumber}}</td>
                 </tr>
+                <input type="hidden" name="id[]" value="{{$id}}">
+                <input type="hidden" name="name[]" value="{{$driverName}}">
+                <input type="hidden" name="type[]" value="{{$row->type}}">
+                <input type="hidden" name="carNumber[]" value="{{$driverNumber}}">
+                <input type="hidden" name="dest[]" value="{{$row->dest}}">
+                <input type="hidden" name="trackNumber[]" value="{{$row->trackNumber}}">
+                <input type="hidden" name="startDate[]" value="{{$row->startDate}}">
+                @foreach ($dist as $d)
+                  @if ($d->prov == $row->dest)
+                    <input type="hidden" name="dist[]" value="{{$d->dist}}">
+                  @endif
+                @endforeach
                 <?php $count++ ?>
             @endforeach
-            <!-- @endforeach -->
           </tbody>
         </table>
       </div>
@@ -206,13 +226,13 @@
     <div class="col-lg-12"> <br /></div>
     <div class="col-lg-4"></div>
     <div class="col-lg-4">
-      <button type="button" style="width:100%;font-size:20px;" class="btn btn-gradient-primary btn-icon-text">
+      <button type="submit" style="width:100%;font-size:20px;" class="btn btn-gradient-primary btn-icon-text">
         <i class="mdi mdi-file-check btn-icon-prepend"></i> ยืนยัน
       </button>
     </div>
     <div class="col-lg-4"></div>
   </div>
-
+  </form>
 </div>
 
 @endsection
