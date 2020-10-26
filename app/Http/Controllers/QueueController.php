@@ -84,8 +84,50 @@ class QueueController extends Controller
         return view('home',['orders' => $orders, 'i' => $i]);
     }
 
-    // public function show(){
-    //     $scheds = DB::table('pre_schedule')::all()->get();
-    //     return view('queue-management/output',['scheds' => $scheds]);
-    // }
+    public function addQueue()
+    {
+        $count = count($_POST['id']);
+        for ($i = 0; $i < $count; $i++){
+            $id = $_POST['id'][$i];
+            $name = $_POST['name'][$i];
+            $type = $_POST['type'][$i];
+            $carNumber = $_POST['carNumber'][$i];
+            $dest = $_POST['dest'][$i];
+            $trackNumber = $_POST['trackNumber'][$i];
+            $startDate = $_POST['startDate'][$i];
+            $dist = $_POST['dist'][$i];
+            $status = 'รับออเดอร์เข้าระบบ';
+            if (isset($_POST["id"][$i])) {
+                DB::table('driver_schedule')->insert(
+                    [
+                        'id' => $id,
+                        'name' => $name,
+                        'type' => $type,
+                        'carNumber' => $carNumber,
+                        'dest' => $dest,
+                        'trackNumber' => $trackNumber,
+                        'startDate' => $startDate,
+                        'endDate' => $startDate,
+                        'dist' => $dist
+                    ]
+                );
+                DB::table('update_status')->insert(
+                    [
+                        'trackNumber' => $trackNumber,
+                        'status' => $status,
+                        'updateDate' => now(),
+                    ]
+                );
+                DB::delete('DELETE FROM pre_schedule');
+            }
+        }
+
+        $orders = DB::table('driver_schedule')
+            ->join('update_status', 'driver_schedule.trackNumber', '=', 'update_status.trackNumber')
+            ->groupBy('driver_schedule.trackNumber')
+            ->orderBy('updateDate')
+            ->get();
+        $i = 0;
+        return view('home',['orders' => $orders, 'i' => $i]);
+    }
 }

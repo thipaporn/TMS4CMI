@@ -68,6 +68,7 @@ Route::get('/home','App\Http\Controllers\QueueController@showStatus');
 
 Route::get('/queueManagement','App\Http\Controllers\QueueController@showQueue');
 Route::post('/queueManagement','App\Http\Controllers\QueueController@preQueue');
+Route::post('/addQueue','App\Http\Controllers\QueueController@addQueue');
 // Route::get('/queueManagement','App\Http\Controllers\QueueController@index');
 
 
