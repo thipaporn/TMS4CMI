@@ -58,18 +58,17 @@ Route::get('/table', function () {
 
 /*--------------------------------------------------------------------*/
 
-Route::get('/home', function () {
-    return view('home');
-});
-
 Route::get('/queueManagementInput', function () {
-    /* return view('queue-management/input'); */
-    return view('queue-management/test');
+    return view('queue-management/input');
+    //return view('queue-management/test');
 });
 
-Route::get('/queueManagement', function () {
-    return view('queue-management/output');
-});
+// home
+Route::get('/home','App\Http\Controllers\QueueController@showStatus');
+
+Route::get('/queueManagement','App\Http\Controllers\QueueController@showQueue');
+Route::post('/queueManagement','App\Http\Controllers\QueueController@preQueue');
+// Route::get('/queueManagement','App\Http\Controllers\QueueController@index');
 
 
 /*---- QR Code ----*/
@@ -77,5 +76,5 @@ Route::get('/codeGeneratorInput', 'App\Http\Controllers\BillController@bill');
 Route::post('/codeGeneratorOutput','App\Http\Controllers\BillController@billView');
 
 Route::get('/readQR', 'App\Http\Controllers\BillController@readQR');
-Route::post('/updateStatus', 'App\Http\Controllers\BillController@update');
+Route::get('/updateStatus', 'App\Http\Controllers\BillController@update');
 

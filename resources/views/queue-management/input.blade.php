@@ -1,8 +1,6 @@
 @extends('queue-management.base')
-
 <!-- @yield('content-wrapper') -->
 <!-- @yield('script') -->
-
 @section('content-wrapper')
 <div class="row">
   <div class="page-header col-lg-12">
@@ -37,7 +35,6 @@
               <label for="date">วันที่จัดส่งสินค้า</label>
               <input type="date" class="form-control" id="date" >
             </div>
-            
             <div class="dynamic_field">
                 <div class="row">
                   <div class="col-md-5">
@@ -54,13 +51,12 @@
                   </div>
                   <div class="col-md-2">
                     <div class="form-group">
-                      <br /> 
+                      <br />
                       <button type="button" name="add" id="add" class="btn btn-success btn_add">เพิ่ม</button>
                     </div>
                   </div>
                 </div>
-              </div>  
-
+              </div>
             <div class="row">
               <div class="col-md-12"><br /></div>
               <div class="col-md-4"></div>
@@ -82,9 +78,7 @@
       </div>
     </div>
 </div>
- 
 @endsection
-
 @section('script')
 <script>
 $(document).ready(function(){
@@ -93,12 +87,10 @@ $(document).ready(function(){
           i++;
         $('.dynamic_field').append('<div class="row"><div class="col-md-5"><div class="form-group"><input type="text" name="name['+i+']" class="form-control" id="name" ></div></div><div class="col-md-5"><div class="form-group"><input type="text" name="number['+i+']" class="form-control" id="number" ></div></div><div class="col-md-2"><button type="button" name="remove" id="'+i+'" class="btn btn-danger btn_remove">ลบ</button></div></div>');
             });
-
         $('.dynamic_field').on('click', '.btn_remove', function(){
           $(this).closest('div.row').remove();
           i--;
         });
-
         $('#submit').click(function(){
           $.ajax({
             url:"name.php",
@@ -111,7 +103,6 @@ $(document).ready(function(){
             }
           });
         });
-
 });
 </script>
 @endsection
