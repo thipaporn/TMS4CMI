@@ -78,7 +78,11 @@
               <td>{{$order->dest}}</td>
               <td>{{$order->trackNumber}}</td>
               <td>{{$order->startDate}}</td>
-              <td>{{$order->status}}</td>
+              @foreach ($status as $s)
+                @if($s->trackNumber==$order->trackNumber)
+                  <td>{{$s->status}}</td>
+                @endif
+              @endforeach  
             </tr>
           @endif
           @endforeach
@@ -97,7 +101,11 @@
             <td>{{$order->dest}}</td>
             <td>{{$order->trackNumber}}</td>
             <td>{{$order->startDate}}</td>
-            <td>{{$order->status}}</td>
+            @foreach ($status as $s)
+              @if($s->trackNumber==$order->trackNumber)
+                <td>{{$s->status}}</td>
+              @endif
+            @endforeach  
           </tr>
           @endforeach
           @endif
