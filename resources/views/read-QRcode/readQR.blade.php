@@ -29,18 +29,8 @@
         <div class="col-lg-2"></div>
         <h3 class="col-sm-2 col-form-label">สถานะปัจจุบัน</h3>
         <div class="col-lg-6">
-          <?php
-          if ($b->status == 'order') {
-            $status = 'รับออเดอร์เข้าระบบ';
-          } elseif ($b->status == 'processing') {
-            $status = "กำลังจัดเตรียมสินค้า";
-          } elseif ($b->status == 'shipping') {
-            $status = "อยู่ระหว่างการขนส่ง";
-          } else {
-            $status = "จัดส่งเรียบร้อยแล้ว";
-          }
-          ?>
-          <input type="text" class="form-control" style="font-size: 15px;" value="{{$status}}" readonly>
+          
+          <input type="text" class="form-control" style="font-size: 15px;" value="{{$b->status}}" readonly>
         </div>
         <div class="col-lg-2"></div>
       </div>
@@ -51,7 +41,7 @@
           @csrf
           <input type="hidden" name="billNum" value="{{$b->trackNumber}}" />
           <input type="hidden" name="billStatus" value="{{$b->status}}" />
-          @if ($b->status != 'complete')
+          @if ($b->status != 'จัดส่งสินค้าเรียบร้อยแล้ว')
           <button type="button" onclick="fncAction0(billNum.value)" class="btn btn-gradient-primary btn-lg btn-block col-lg-6" style="font-size: 20px;"> อัปเดตสถานะ </button>
           @endif
 
@@ -79,9 +69,7 @@
       }).then((result) => {
         if (result.isConfirmed) {
           Swal.fire(
-            'Deleted!',
-            'Your file has been deleted.',
-            'success'
+            'อัปเดตสถานะสำเร็จ!'
           )
           setTimeout(function() {
             window.location.assign("/TMS4CMI/public/updateStatus?billNum=" + billNum);
