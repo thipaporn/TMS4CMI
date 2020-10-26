@@ -78,10 +78,16 @@ class QueueController extends Controller
         $orders = DB::table('driver_schedule')
             ->join('update_status', 'driver_schedule.trackNumber', '=', 'update_status.trackNumber')
             ->groupBy('driver_schedule.trackNumber')
-            ->orderBy('updateDate')
-            ->get();
-        $i = 0;
-        return view('home',['orders' => $orders, 'i' => $i]);
+            ->orderBy('updateDate', 'DESC')
+            ->get(); 
+        $status = DB::select('SELECT t1.trackNumber, t1.status, t1.updateDate
+        FROM update_status t1,( SELECT trackNumber, status,MAX(updateDate) as lastDate 
+                                  FROM update_status
+                                  GROUP by trackNumber) t2
+        WHERE t1.trackNumber = t2.trackNumber AND t1.updateDate = t2.lastDate');
+
+        //print_r($status);
+        return view('home',['orders' => $orders, 'status' => $status]);
     }
 
     public function addQueue()
@@ -125,9 +131,14 @@ class QueueController extends Controller
         $orders = DB::table('driver_schedule')
             ->join('update_status', 'driver_schedule.trackNumber', '=', 'update_status.trackNumber')
             ->groupBy('driver_schedule.trackNumber')
-            ->orderBy('updateDate')
-            ->get();
-        $i = 0;
-        return view('home',['orders' => $orders, 'i' => $i]);
+            ->orderBy('updateDate', 'DESC')
+            ->get(); 
+        $status = DB::select('SELECT t1.trackNumber, t1.status, t1.updateDate
+        FROM update_status t1,( SELECT trackNumber, status,MAX(updateDate) as lastDate 
+                                  FROM update_status
+                                  GROUP by trackNumber) t2
+        WHERE t1.trackNumber = t2.trackNumber AND t1.updateDate = t2.lastDate');
+
+        return view('home',['orders' => $orders, 'status' => $status]);
     }
 }
